@@ -1,11 +1,23 @@
 import sys
-sys.path.append("/home/ioerger/genomics")
-from utils import *
 
-# read genome seq from vcf (or from pilon.fna?)
+# extract genome seq from vcf 
 
 vcffile = sys.argv[1]
 prot_table = sys.argv[2]
+
+##############################
+
+complement = {'A':'T','T':'A','C':'G','G':'C'}
+
+def reverse_complement(seq):
+  s = list(seq)
+  s.reverse()
+  for i in range(len(s)):
+    s[i] = complement.get(s[i],s[i]) # if unknown, leave as it, e.g > or !
+  s = ''.join(s)
+  return s
+
+##############################
 
 sites = {}
 for line in open(vcffile):
