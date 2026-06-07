@@ -36,6 +36,7 @@ for n,a in enumerate(strains):
     for k in range(len(seqs[0])):
       if seqs[i][k]!=seqs[j][k] and seqs[i][k]!='?' and seqs[j][k]!='?': snps += 1
     s += "%3d " % snps
-  print(s)
+    if a<b: print(a,b,snps)
+  #print(s)
   sys.stdout.flush()
 
