@@ -143,6 +143,11 @@ for line in open(sys.argv[1]):
     a,b = max(nucs),sum(nucs)
     het = 0 if b==0 else (b-a)/float(b)
 
-  vals = w+[cov,round(het,3)]+temp
-  print('\t'.join([str(x) for x in vals]))
+  vals = w+temp
+  #vals = w+[cov,round(het,3)]+temp # add 2 extra cals for cov and het
+  s = '\t'.join([str(x) for x in vals])
+  if "<DUP>" in s: continue
+  #if '*' in s: print(s)
+  print(s)
+
   
