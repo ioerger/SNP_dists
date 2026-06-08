@@ -1,5 +1,14 @@
 import sys
 
+# example:
+# > python3 ~/SNP_dists/combine_all_orf_seqs.py all.genes strains.batchE
+# reads <strain>.orfs.txt; writes <orf>.seqs.txt
+
+all_orfs = sys.argv[1]
+all_strains = sys.argv[2]
+
+###################
+
 def read_fasta(filename):
   headers,seqs = [],[]
   seq = ""
@@ -16,14 +25,11 @@ def read_fasta(filename):
 
 ###################
 
-all_orfs = sys.argv[1]
-all_strains = sys.argv[2]
-
 OrfSeqs = {}
 
 for line in open(all_strains):
   id = line[:-1]
-  fname = "%s/%s.orfs.fna" % (id,id)
+  fname = "%s.orfs.fna" % id
   sys.stderr.write("reading %s\n" % fname)
   h,s = read_fasta(fname)
   for h2,s2 in zip(h,s):
@@ -35,7 +41,7 @@ for line in open(all_strains):
 
 for line in open(all_orfs):
   orf = line[:-1]
-  fname = "orfs/%s.seqs.txt" % orf
+  fname = "%s.seqs.txt" % orf
   sys.stderr.write("writing %s\n" % fname)
   fil = open(fname,"w+")
   for (strain,seq) in OrfSeqs[orf]:
