@@ -1,23 +1,10 @@
 import sys
+from utils import *
 
 # extract genome seq from vcf 
 
 vcffile = sys.argv[1]
 prot_table = sys.argv[2]
-
-##############################
-
-complement = {'A':'T','T':'A','C':'G','G':'C'}
-
-def reverse_complement(seq):
-  s = list(seq)
-  s.reverse()
-  for i in range(len(s)):
-    s[i] = complement.get(s[i],s[i]) # if unknown, leave as it, e.g > or !
-  s = ''.join(s)
-  return s
-
-##############################
 
 sites = {}
 for line in open(vcffile):

@@ -1,4 +1,5 @@
 import sys
+from utils import *
 
 # example:
 # > python3 ~/SNP_dists/combine_all_orf_seqs.py all.genes strains.batchE
@@ -6,24 +7,6 @@ import sys
 
 all_orfs = sys.argv[1]
 all_strains = sys.argv[2]
-
-###################
-
-def read_fasta(filename):
-  headers,seqs = [],[]
-  seq = ""
-  for line in open(filename):
-    line = line.rstrip()
-    if len(line)==0: continue
-    if line[0]==">":
-      headers.append(line)
-      if seq!="": seqs.append(seq)
-      seq = ""
-    else: seq += line
-  seqs.append(seq)
-  return headers,seqs
-
-###################
 
 OrfSeqs = {}
 
